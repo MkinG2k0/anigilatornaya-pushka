@@ -55,15 +55,38 @@ const Main = () => {
 	const {width, height} = useWindowSize()
 	const [onHelp, setOnHelp] = useState(false)
 	const [numberPeace, setNumberPeace] = useState(0)
-	// const client = new OpenAI({
-	// 	apiKey: import.meta.env.VITE_OPENAI, // This is the default and can be omitted
-	// })
+	const [image, setImage] = useState('')
+
+	const client = new OpenAI({
+		apiKey: import.meta.env.VITE_OPENAI, // This is the default and can be omitted
+		dangerouslyAllowBrowser: true,
+	})
+
+	async function main() {
+		// const params: OpenAI.Chat.ChatCompletionCreateParams = {
+		// 	messages: [{role: 'user', content: 'hi'}],
+		// 	model: 'gpt-3.5-turbo',
+		// }
+		const params: OpenAI.Images.ImageGenerateParams = {
+			prompt: 'Generate an original bull badge image in the nft style.',
+			n: 1,  // Количество изображений, которые нужно сгенерировать
+			size: '1024x1024',  // Размер изображения: 256x256, 512x512, 1024x1024
+		}
+		const chatCompletion = await client.images.generate(params)
+		setImage(chatCompletion.data[0].url!)
+	}
+
+	useEffect(() => {
+		main()
+	}, [])
 
 	useEffect(() => {
 		let timer
 		if (numberPeace > 0) {
+			main()
 			timer = setTimeout(() => {
 				setNumberPeace(0)
+				setOnHelp(false)
 			}, 8000)
 		}
 
@@ -75,6 +98,10 @@ const Main = () => {
 	return (
 		<div className={'col-2 p-2 overflow-auto'}>
 			<Banner/>
+			{
+				onHelp && <img className={'money'} src={image}/>
+			}
+
 
 			<Dialog>
 				{
@@ -148,12 +175,13 @@ interface IPlace {
 	image?: string
 	money?: number | string
 	need?: number
+	isDone?: boolean
 }
 
 interface ICard extends IPlace {
 }
 
-const Card = ({description, image, money, need, title}: ICard) => {
+export const Card = ({description, image, money, need, isDone, title}: ICard) => {
 	return <div className={'bg-white rounded overflow-hidden'}>
 		<div className={'w-full h-18 relative'}>
 			<img alt={''} className={'h-[220px] w-full object-cover '}
@@ -175,9 +203,16 @@ const Card = ({description, image, money, need, title}: ICard) => {
 					</div>
 				</Button>
 
-				<DialogTrigger asChild>
-					<Button className={'flex-auto text-lg font-bold'}>Помочь</Button>
-				</DialogTrigger>
+				{
+					isDone ? <div className={'flex-auto row items-center bg-gray-200 rounded-full  justify-between'}>
+							<div className={'px-3 flex-auto text-center'}>Сбор</div>
+							<Button className={'flex-auto'}>Отчет</Button>
+						</div> :
+						<DialogTrigger asChild>
+							<Button className={'flex-auto text-lg font-bold'}>Помочь</Button>
+						</DialogTrigger>
+
+				}
 
 			</div>
 			<div>

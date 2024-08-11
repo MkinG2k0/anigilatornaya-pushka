@@ -120,7 +120,7 @@ export const Help = () => {
 
 
 		<Dialog>
-			<div className={'row-2 flex-wrap overflow-y-auto'}>
+			<div className={'row-2 flex-wrap '}>
 				{
 					data.map((value) => <Card {...value} key={value.title} set={(value) => {
 						setType(value)

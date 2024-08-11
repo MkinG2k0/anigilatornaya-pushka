@@ -65,7 +65,7 @@ export const Layout: FC = () => {
 	return (
 		<div className={'w-[100dvw] h-[100dvh] overflow-hidden col'}>
 			<Header/>
-			<div className={'flex-auto overflow-auto'}>
+			<div className={'flex-auto overflow-y-auto'}>
 				<Outlet/>
 			</div>
 			<Footer/>

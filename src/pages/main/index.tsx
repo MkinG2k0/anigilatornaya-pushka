@@ -22,6 +22,7 @@ import { AiOutlineMessage } from 'react-icons/ai'
 import { HiOutlineUsers } from 'react-icons/hi2'
 import { PiShareFat } from 'react-icons/pi'
 import { CiStar } from 'react-icons/ci'
+import OpenAI from 'openai'
 
 const data: IPlace[] = [
 	{
@@ -29,18 +30,34 @@ const data: IPlace[] = [
 		description: 'ЦЕНТРАЛЬНАЯ ДЖУМА-МЕЧЕТЬ',
 		image: 'https://edem-vit.by/wp-content/uploads/1-519.jpg',
 		need: 1000,
-		money: 356000,
-	}, {
+		money: '356 000',
+	},
+	{
 		title: 'Сердце Чечни',
 		description: 'Мечеть «Сердце Чечни» имени Ахмата Кадырова',
 		image: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Мечеть_в_городе_Грозном_-_panoramio.jpg',
-		money: 675000,
-	}]
+		money: '675 000',
+	},
+	{
+		title: 'Помощь малоимущим',
+		description: '',
+		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/9e4eb798-d371-4cdf-b4a6-7a5c6e74fe3c/Default_A_diverse_group_of_cartoon_characters_banding_together_1.jpg?w=512',
+		money: '452 000',
+	}, {
+		title: 'Помощь в рамадан',
+		description: 'Помощь проведения рамадана в бедных странах',
+		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/1ccc5683-d095-4f11-a0c7-67378007ec1b/Default_A_diverse_group_of_cartoon_Muslim_characters_come_toge_2.jpg',
+		money: '452 000',
+	},
+]
 
 const Main = () => {
 	const {width, height} = useWindowSize()
 	const [onHelp, setOnHelp] = useState(false)
 	const [numberPeace, setNumberPeace] = useState(0)
+	// const client = new OpenAI({
+	// 	apiKey: import.meta.env.VITE_OPENAI, // This is the default and can be omitted
+	// })
 
 	useEffect(() => {
 		let timer
@@ -129,7 +146,7 @@ interface IPlace {
 	title: string
 	description: string
 	image?: string
-	money?: number
+	money?: number | string
 	need?: number
 }
 

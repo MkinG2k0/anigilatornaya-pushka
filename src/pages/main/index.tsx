@@ -1,13 +1,29 @@
+import { useEffect, useState } from 'react'
+import Confetti from 'react-confetti'
+
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from 'shared/ui/dialog'
 import { generateNumber } from 'shared/lib/gen'
+import { Input } from 'shared/ui/input'
+import { Label } from 'shared/ui/label'
 import { Button } from 'shared'
 
+import useWindowSize from 'react-use/lib/useWindowSize'
 import { MdArrowForwardIos } from 'react-icons/md'
 import { AiOutlineMessage } from 'react-icons/ai'
 import { HiOutlineUsers } from 'react-icons/hi2'
 import { PiShareFat } from 'react-icons/pi'
 import { CiStar } from 'react-icons/ci'
 
-const data: ICard[] = [
+const data: IPlace[] = [
 	{
 		title: 'ДЖУМА-МЕЧЕТЬ',
 		description: 'ЦЕНТРАЛЬНАЯ ДЖУМА-МЕЧЕТЬ',
@@ -22,12 +38,79 @@ const data: ICard[] = [
 	}]
 
 const Main = () => {
+	const {width, height} = useWindowSize()
+	const [onHelp, setOnHelp] = useState(false)
+	const [numberPeace, setNumberPeace] = useState(0)
+
+	useEffect(() => {
+		let timer
+		console.log(numberPeace)
+		if (numberPeace > 0) {
+			timer = setTimeout(() => {
+				setNumberPeace(0)
+			}, 8000)
+		}
+
+		return () => {
+			clearTimeout(timer)
+		}
+	}, [numberPeace])
+
 	return (
 		<div className={'col-2 p-2 overflow-auto'}>
 			<Banner/>
-			{
-				data.map((value) => <Card {...value}/>)
-			}
+
+			<Dialog>
+				{
+					data.map((value) => <Card {...value} key={value.title}/>)
+				}
+				<DialogContent className={'sm:max-w-[425px]'}>
+					<DialogHeader>
+						<DialogTitle>Помочь</DialogTitle>
+						{/*<DialogDescription>*/}
+						{/*	Отправить помощь*/}
+						{/*</DialogDescription>*/}
+					</DialogHeader>
+					<div className={'grid gap-4 py-4'}>
+						<div className={'grid grid-cols-4 items-center gap-4'}>
+							<Label className={'text-right'} htmlFor={'name'}>
+								Имя
+							</Label>
+							<Input
+								className={'col-span-3'}
+								defaultValue={'Кама'}
+								id={'name'}
+							/>
+						</div>
+						<div className={'grid grid-cols-4 items-center gap-4'}>
+							<Label className={'text-right'} htmlFor={'username'}>
+								Сумма
+							</Label>
+							<Input
+								className={'col-span-3'}
+								defaultValue={'100'}
+								id={'username'}
+								type={'number'}
+							/>
+						</div>
+					</div>
+					<DialogFooter
+					>
+						<DialogClose>
+							<Button onClick={() => {
+								setOnHelp(true)
+								setNumberPeace(200)
+							}}>Отправить</Button>
+						</DialogClose>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+			<Confetti
+				gravity={0.01}
+				height={height}
+				numberOfPieces={numberPeace}
+				width={width}
+			/>
 		</div>
 	)
 }
@@ -42,12 +125,15 @@ const Banner = () => {
 	</div>
 }
 
-interface ICard {
+interface IPlace {
 	title: string
 	description: string
 	image?: string
 	money?: number
 	need?: number
+}
+
+interface ICard extends IPlace {
 }
 
 const Card = ({description, image, money, need, title}: ICard) => {
@@ -71,7 +157,11 @@ const Card = ({description, image, money, need, title}: ICard) => {
 						Поделиться
 					</div>
 				</Button>
-				<Button className={'flex-auto text-lg font-bold'}>Помочь</Button>
+
+				<DialogTrigger asChild>
+					<Button className={'flex-auto text-lg font-bold'}>Помочь</Button>
+				</DialogTrigger>
+
 			</div>
 			<div>
 				<div className={'text-muted-foreground'}>

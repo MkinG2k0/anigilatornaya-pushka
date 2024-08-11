@@ -30,7 +30,7 @@ const Header = () => {
 }
 
 const Footer = () => {
-	return <div className={'fixed bottom-0 row-2 p-2 px-4 justify-between items-center w-full '}>
+	return <div className={' bottom-0 row-2 p-2 px-4 justify-between items-center w-full bg-gray-100'}>
 		<NavBtn className={'col h-16'} to={''} variant={'ghost'}>
 			<CiFolderOn className={'w-7 h-7'}/>
 			<div>
@@ -60,12 +60,14 @@ const Footer = () => {
 
 export const Layout: FC = () => {
 	return (
-		<div className={'relative w-[100dvw] h-[100dvh] overflow-hidden'}>
+		<div className={'w-[100dvw] h-[100dvh] overflow-hidden col'}>
 			<Header/>
+			<div className={'flex-auto overflow-auto'}>
+				<Outlet/>
+			</div>
 			<Footer/>
+
 			<Toaster/>
-			
-			<Outlet/>
 		</div>
 	)
 }

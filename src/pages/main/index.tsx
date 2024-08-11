@@ -7,12 +7,27 @@ import { HiOutlineUsers } from 'react-icons/hi2'
 import { PiShareFat } from 'react-icons/pi'
 import { CiStar } from 'react-icons/ci'
 
+const data: ICard[] = [
+	{
+		title: 'ДЖУМА-МЕЧЕТЬ',
+		description: 'ЦЕНТРАЛЬНАЯ ДЖУМА-МЕЧЕТЬ',
+		image: 'https://edem-vit.by/wp-content/uploads/1-519.jpg',
+		need: 1000,
+		money: 356000,
+	}, {
+		title: 'Сердце Чечни',
+		description: 'Мечеть «Сердце Чечни» имени Ахмата Кадырова',
+		image: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Мечеть_в_городе_Грозном_-_panoramio.jpg',
+		money: 675000,
+	}]
+
 const Main = () => {
 	return (
-		<div className={'col-2  p-2'}>
+		<div className={'col-2 p-2 overflow-auto'}>
 			<Banner/>
-
-			<Card/>
+			{
+				data.map((value) => <Card {...value}/>)
+			}
 		</div>
 	)
 }
@@ -27,14 +42,23 @@ const Banner = () => {
 	</div>
 }
 
-const Card = ({}) => {
+interface ICard {
+	title: string
+	description: string
+	image?: string
+	money?: number
+	need?: number
+}
+
+const Card = ({description, image, money, need, title}: ICard) => {
 	return <div className={'bg-white rounded overflow-hidden'}>
 		<div className={'w-full h-18 relative'}>
 			<img alt={''} className={'h-[220px] w-full object-cover '}
-					 src={'https://upload.wikimedia.org/wikipedia/commons/6/6d/Мечеть_в_городе_Грозном_-_panoramio.jpg'}/>
+					 src={image}/>
+			<div className={'teni absolute left-0 top-0 w-full h-full '}></div>
 			<div className={'absolute left-0 top-0 flex justify-between text-white w-full p-2 items-center'}>
-				<div className={'text-white text-2xl '}>
-					Мечеть
+				<div className={'text-white text-xl '}>
+					{title}
 				</div>
 				<CiStar className={'w-8 h-8'}/>
 			</div>
@@ -54,11 +78,11 @@ const Card = ({}) => {
 					собрали
 				</div>
 				<div className={'text-2xl font-bold text-accent'}>
-					356 000 ₽
+					{money} ₽
 				</div>
 			</div>
 			<div className={'text-xl font-bold '}>
-				Мечеть «Сердце Чечни» имени Ахмата Кадырова
+				{description}
 			</div>
 			<div className={'w-full bg-gray-800 h-[1px]'}></div>
 			<div className={'row-4 text-2xl justify-between h-10 items-center'}>
@@ -71,7 +95,7 @@ const Card = ({}) => {
 
 				</div>
 				<div>
-					<div className={'text-lg text-muted-foreground row-2 items-center '}>
+					<div className={'text-lg text-muted-foreground row items-center '}>
 						<div>
 							Комментарии
 						</div>

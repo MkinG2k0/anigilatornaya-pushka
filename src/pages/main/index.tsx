@@ -61,7 +61,6 @@ const Main = () => {
 
 	useEffect(() => {
 		let timer
-		console.log(numberPeace)
 		if (numberPeace > 0) {
 			timer = setTimeout(() => {
 				setNumberPeace(0)
@@ -84,9 +83,6 @@ const Main = () => {
 				<DialogContent className={'sm:max-w-[425px]'}>
 					<DialogHeader>
 						<DialogTitle>Помочь</DialogTitle>
-						{/*<DialogDescription>*/}
-						{/*	Отправить помощь*/}
-						{/*</DialogDescription>*/}
 					</DialogHeader>
 					<div className={'grid gap-4 py-4'}>
 						<div className={'grid grid-cols-4 items-center gap-4'}>
@@ -132,13 +128,17 @@ const Main = () => {
 	)
 }
 const Banner = () => {
-	return <div className={'bg-amber-600 text-white p-4 rounded col-2'}>
-		<div className={'text-2xl'}>
-			Текст по поводу курбан
+	return <div className={'bg-[#453254] text-white  rounded row-2 justify-between items-center px-1'}>
+		<div className={'col p-4'}>
+			<div className={'text-2xl'}>
+				Пожертвование
+			</div>
+			<div className={'text-lg'}>
+				в честь месяца рамадан
+			</div>
 		</div>
-		<div className={'text-lg'}>
-			непосредственное опписание
-		</div>
+		<img className={'w-20 h-20 object-contain'}
+				 src={'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/3f4e1d10-08d9-4aad-9f14-bc0109b5df3a/Default_vector_icon_on_the_background_of_the_upcoming_holiday_2.jpg'}/>
 	</div>
 }
 

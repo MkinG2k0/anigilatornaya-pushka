@@ -1,7 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { lazy } from 'react'
 
+import { Notifications } from 'pages/notifications'
 import CreateOrder from 'pages/create-order'
+import { Completed } from 'pages/completed'
+import { Profile } from 'pages/profile'
 import Settings from 'pages/settings'
 import Preview from 'pages/preview'
 import Auth from 'pages/auth'
@@ -13,32 +16,44 @@ import { NAV } from 'shared/config/routing/router'
 
 export const router = createBrowserRouter([
 	{
-		element: <Layout />,
+		element: <Layout/>,
 		path: NAV.root(),
 		children: [
 			{
-				element: <Main />,
+				element: <Main/>,
 				path: NAV.root(),
 			},
 			{
-				element: <Auth />,
+				element: <Completed/>,
+				path: 'completed',
+			},
+			{
+				element: <Notifications/>,
+				path: 'notifications',
+			},
+			{
+				element: <Profile/>,
+				path: 'profile',
+			},
+			//
+			{
+				element: <Auth/>,
 				path: NAV.auth(),
 			},
-
 			{
-				element: <Preview />,
+				element: <Preview/>,
 				path: NAV.previewNav(),
 			},
 			{
-				element: <Settings />,
+				element: <Settings/>,
 				path: NAV.settings(),
 			},
 			{
-				element: <CreateOrder />,
+				element: <CreateOrder/>,
 				path: NAV.createOrderId(),
 			},
 			{
-				element: <CreateOrder />,
+				element: <CreateOrder/>,
 				path: NAV.viewOrderId(),
 			},
 		],

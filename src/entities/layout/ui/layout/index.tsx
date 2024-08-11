@@ -31,25 +31,25 @@ const Header = () => {
 
 const Footer = () => {
 	return <div className={' bottom-0 row-2 p-2 px-4 justify-between items-center w-full bg-gray-100'}>
-		<NavBtn className={'col h-16'} to={''} variant={'ghost'}>
+		<NavBtn className={'col h-16'} to={'/'} variant={'ghost'}>
 			<CiFolderOn className={'w-7 h-7'}/>
 			<div>
 				Сборы
 			</div>
 		</NavBtn>
-		<NavBtn className={'col h-16'} to={''} variant={'ghost'}>
+		<NavBtn className={'col h-16'} to={'/completed'} variant={'ghost'}>
 			<CiSquareChevDown className={'w-7 h-7'}/>
 			<div>
 				Завершенные
 			</div>
 		</NavBtn>
-		<NavBtn className={'col h-16'} to={''} variant={'ghost'}>
+		<NavBtn className={'col h-16'} to={'/notifications'} variant={'ghost'}>
 			<GoBell className={'w-7 h-7'}/>
 			<div>
 				Уведомления
 			</div>
 		</NavBtn>
-		<NavBtn className={'col h-16'} to={''} variant={'ghost'}>
+		<NavBtn className={'col h-16'} to={'/profile'} variant={'ghost'}>
 			<CiUser className={'w-7 h-7'}/>
 			<div>
 				Профиль

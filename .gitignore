@@ -44,3 +44,4 @@ dist
 android
 ios
 web
+.env

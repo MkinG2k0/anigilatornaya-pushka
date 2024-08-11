@@ -63,10 +63,6 @@ const Main = () => {
 	})
 
 	async function main() {
-		// const params: OpenAI.Chat.ChatCompletionCreateParams = {
-		// 	messages: [{role: 'user', content: 'hi'}],
-		// 	model: 'gpt-3.5-turbo',
-		// }
 		const params: OpenAI.Images.ImageGenerateParams = {
 			prompt: 'Generate an original bull badge image in the nft style.',
 			n: 1,  // Количество изображений, которые нужно сгенерировать

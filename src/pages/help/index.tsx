@@ -4,6 +4,7 @@ import Confetti from 'react-confetti'
 import { Card } from 'pages/main'
 
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'shared/ui/dialog'
+import { generateNumber } from 'shared/lib/gen'
 import { Input } from 'shared/ui/input'
 import { Label } from 'shared/ui/label'
 import { Button } from 'shared'
@@ -14,7 +15,7 @@ import OpenAI from 'openai'
 const data = [
 	{
 		title: 'Строительство мечети в п. Чунском, Иркутской области',
-		description: 'Строительство мечети в п. Чунском, Иркутской области',
+		description: 'Строительство мечети в Иркутской области',
 		image: '/help/1.jpeg',
 		money: '252 000',
 		need: '800 000',
@@ -31,6 +32,30 @@ const data = [
 		money: '452 000',
 		need: '800 000',
 	},
+	{
+		title: 'Барашка',
+		description: '',
+		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/fd29933b-c39c-4706-9f64-d87f999eb7b4/Default_a_lamb_in_a_cartoon_style_3.jpg',
+		money: '20 000',
+	}, {
+		title: 'Корова',
+		description: '',
+		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/7f24e7ec-bded-48bf-b1b8-a8a04f4babbe/Default_a_cow_in_cartoon_style_1.jpg',
+		money: '80 000',
+	},
+	{
+		title: 'Курица',
+		description: '',
+		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/634fc658-7bd5-4c63-97c9-93fed37c47eb/Default_chicken_in_cartoon_style_2.jpg',
+		money: '5 000',
+	},
+]
+
+const dataImage = [
+	'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/fbf9be2c-b783-4cfa-b49a-2be3016f8c0e/Default_Create_an_original_image_of_a_mosque_icon_in_a_network_0.jpg',
+	'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/fbf9be2c-b783-4cfa-b49a-2be3016f8c0e/Default_Create_an_original_image_of_a_mosque_icon_in_a_network_1.jpg',
+	'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/fbf9be2c-b783-4cfa-b49a-2be3016f8c0e/Default_Create_an_original_image_of_a_mosque_icon_in_a_network_2.jpg',
+	'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/fbf9be2c-b783-4cfa-b49a-2be3016f8c0e/Default_Create_an_original_image_of_a_mosque_icon_in_a_network_3.jpg',
 ]
 
 export const Help = () => {
@@ -54,14 +79,17 @@ export const Help = () => {
 		setImage(chatCompletion.data[0].url!)
 	}
 
+	const genImage = () => {
+		setImage(dataImage[generateNumber(0, dataImage.length - 1)])
+	}
 	useEffect(() => {
-		main()
+		// main()
 	}, [])
 
 	useEffect(() => {
 		let timer
 		if (numberPeace > 0) {
-			main()
+			// main()
 			timer = setTimeout(() => {
 				setNumberPeace(0)
 				setOnHelp(false)
@@ -118,6 +146,7 @@ export const Help = () => {
 						<Button onClick={() => {
 							setOnHelp(true)
 							setNumberPeace(200)
+							genImage()
 						}}>Отправить</Button>
 					</DialogClose>
 				</DialogFooter>

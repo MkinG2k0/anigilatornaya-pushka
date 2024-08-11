@@ -94,7 +94,6 @@ const Main = () => {
 				// 'Content-Type': 'application/json',
 				// 'Accept': 'application/json',
 				// Authorization: `Bearer ${import.meta.env.VITE_GIGA_AUTH}`,
-				aaaaaaaaa: 'asdas',
 			},
 
 			mode: 'no-cors',
@@ -115,7 +114,7 @@ const Main = () => {
 			timer = setTimeout(() => {
 				setNumberPeace(0)
 				setOnHelp(false)
-			}, 8000)
+			}, 5000)
 		}
 
 		return () => {
@@ -227,8 +226,8 @@ export const Card = ({description, image, money, need, isDone, title}: ICard) =>
 			<div className={'teni absolute left-0 top-0 w-full h-full '}></div>
 			<div className={'absolute left-0 top-0 flex justify-between text-white w-full p-2 items-center'}>
 				<div className={'row-2 items-center'}>
-					<div className={' w-10 h-10 rounded-full'} style={{background: randomColors()}}></div>
-					<div className={'text-white text-xl '}>
+					<div className={'w-10 h-10 rounded-full'} style={{background: randomColors()}}></div>
+					<div className={'text-white text-xl break-words'}>
 						{title}
 					</div>
 				</div>

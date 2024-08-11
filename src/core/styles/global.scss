@@ -114,25 +114,32 @@ a {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 500px;
-	height: 500px;
+	width: 350px;
+	height: 350px;
 	object-fit: contain;
-	animation: forwards mon 8s;
-
-	transform-style: preserve-3d;
+	animation: forwards mon 5s;
+	// cut ellipse
+	clip-path: ellipse(50% 50% at 50% 50%);
+	//transform-style: preserve-3d;
 }
 
 @keyframes mon {
 	0% {
 		opacity: 0;
-		transform: rotateY(0deg);
+		//transform: rotateY(0deg);
+	}
+	20% {
+		opacity: 1;
 	}
 	50% {
 		opacity: 1;
 	}
+	80% {
+		opacity: 1;
+	}
 	100% {
 		opacity: 0;
-		transform: rotateY(360deg);
+		//transform: rotateY(360deg);
 
 	}
 }

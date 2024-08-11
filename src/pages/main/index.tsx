@@ -123,7 +123,7 @@ const Main = () => {
 	}, [numberPeace])
 
 	return (
-		<div className={'col-2 p-2  overflow-y-auto '}>
+		<div className={'col-2 p-2 '}>
 			<img src={image}/>
 			<Banner/>
 			{

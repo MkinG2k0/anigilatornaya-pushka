@@ -44,10 +44,10 @@ const data = [
 		money: '80 000',
 	},
 	{
-		title: 'Курица',
+		title: 'Верблюд',
 		description: '',
-		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/634fc658-7bd5-4c63-97c9-93fed37c47eb/Default_chicken_in_cartoon_style_2.jpg',
-		money: '5 000',
+		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/bc4937ad-5691-4ff8-974f-5c507fe652f1/Default_a_camel_in_cartoon_style_1.jpg',
+		money: '135 000',
 	},
 ]
 

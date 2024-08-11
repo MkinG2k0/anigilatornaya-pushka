@@ -2,6 +2,7 @@ import { Outlet } from 'react-router'
 import { FC } from 'react'
 
 import Toobalogonew from 'shared/icon/toobalogonew.svg'
+import { generateNumber } from 'shared/lib/gen'
 import { Toaster } from 'shared/ui/toaster'
 import { Button, NavBtn } from 'shared'
 
@@ -14,10 +15,12 @@ import { GoBell } from 'react-icons/go'
 const Header = () => {
 	return <div className={'row-2 items-center justify-between mb-2 p-2 mt-2'}>
 		<div className={'row-2 items-center'}>
-			<Toobalogonew/>
+			<NavBtn to={'/'} variant={'ghost'}>
+				<Toobalogonew/>
+			</NavBtn>
 			<div className={'col'}>
 				<div className={'font-bold flex'}>
-					<div>15 чел</div>
+					<div>{generateNumber(5, 30)} чел</div>
 					<div className={'w-1 h-1 rounded-full bg-green-500 '}></div>
 				</div>
 				<div className={'text-gray-700'}>помогают</div>

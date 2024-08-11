@@ -13,19 +13,6 @@ import OpenAI from 'openai'
 
 const data = [
 	{
-		title: 'ДЖУМА-МЕЧЕТЬ',
-		description: 'ЦЕНТРАЛЬНАЯ ДЖУМА-МЕЧЕТЬ',
-		image: 'https://edem-vit.by/wp-content/uploads/1-519.jpg',
-		need: 1000,
-		money: '356 000',
-	},
-	{
-		title: 'Сердце Чечни',
-		description: 'Мечеть «Сердце Чечни» имени Ахмата Кадырова',
-		image: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Мечеть_в_городе_Грозном_-_panoramio.jpg',
-		money: '675 000',
-	},
-	{
 		title: 'Помощь малоимущим',
 		description: '',
 		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/9e4eb798-d371-4cdf-b4a6-7a5c6e74fe3c/Default_A_diverse_group_of_cartoon_characters_banding_together_1.jpg?w=512',

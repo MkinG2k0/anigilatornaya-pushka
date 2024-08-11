@@ -4,14 +4,6 @@ import { Dialog } from 'shared/ui/dialog'
 
 const data: any[] = [
 	{
-		title: 'ДЖУМА-МЕЧЕТЬ',
-		description: 'ЦЕНТРАЛЬНАЯ ДЖУМА-МЕЧЕТЬ',
-		image: 'https://edem-vit.by/wp-content/uploads/1-519.jpg',
-		need: 1000,
-		money: '356 000',
-		isDone: true,
-	},
-	{
 		title: 'Помощь малоимущим',
 		description: '',
 		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/9e4eb798-d371-4cdf-b4a6-7a5c6e74fe3c/Default_A_diverse_group_of_cartoon_characters_banding_together_1.jpg?w=512',

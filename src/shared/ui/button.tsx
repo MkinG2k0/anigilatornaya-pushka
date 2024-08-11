@@ -22,7 +22,7 @@ const buttonVariants = cva(
 			variant: {
 				default: 'bg-primary text-primary-foreground hover:background-primary/90 rounded-full ',
 				destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-				ghost: 'hover:bg-accent hover:text-white p-2',
+				ghost: '',
 				link: 'text-primary underline-offset-4 hover:underline',
 				outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
 				icon: 'bg-white hover:bg-accent hover:text-accent-foreground w-10 h-10 p-3 rounded-full',

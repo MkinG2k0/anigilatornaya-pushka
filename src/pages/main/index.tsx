@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-confetti'
 
@@ -26,28 +27,25 @@ import OpenAI from 'openai'
 
 const data: IPlace[] = [
 	{
-		title: 'ДЖУМА-МЕЧЕТЬ',
-		description: 'ЦЕНТРАЛЬНАЯ ДЖУМА-МЕЧЕТЬ',
-		image: 'https://edem-vit.by/wp-content/uploads/1-519.jpg',
-		need: 1000,
-		money: '356 000',
+		title: 'Рука помощи бездомным животным',
+		description: 'Для лечения и восстановления животных в приюте необходим специальный корм',
+		image: 'photo_2024-08-11_22-45-03.jpg',
+		need: '61 812',
+		money: '2 898',
 	},
 	{
-		title: 'Сердце Чечни',
-		description: 'Мечеть «Сердце Чечни» имени Ахмата Кадырова',
-		image: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Мечеть_в_городе_Грозном_-_panoramio.jpg',
-		money: '675 000',
+		title: 'Спина бифида',
+		description: 'Приёмным семьям и потенциальным усыновителям детей со спина бифида необходимы консультации психолога!',
+		image: 'photo_2024-08-11_22-45-00.jpg',
+		money: '131 799',
+		need: '335 539',
 	},
 	{
-		title: 'Помощь малоимущим',
-		description: '',
-		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/9e4eb798-d371-4cdf-b4a6-7a5c6e74fe3c/Default_A_diverse_group_of_cartoon_characters_banding_together_1.jpg?w=512',
-		money: '452 000',
-	}, {
-		title: 'Помощь в рамадан',
-		description: 'Помощь проведения рамадана в бедных странах',
-		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/1ccc5683-d095-4f11-a0c7-67378007ec1b/Default_A_diverse_group_of_cartoon_Muslim_characters_come_toge_2.jpg',
-		money: '452 000',
+		title: 'Желтый аист',
+		description: 'Лена – сирота. Малышке нужны помощь и сопровождение няни на время лечения в больнице!',
+		image: 'photo_2024-08-11_22-44-53.jpg',
+		money: '4 098',
+		need: '92 927',
 	},
 ]
 
@@ -64,7 +62,7 @@ const Main = () => {
 
 	async function main() {
 		const params: OpenAI.Images.ImageGenerateParams = {
-			prompt: 'Generate an original bull badge image in the nft style.',
+			prompt: 'Generate an original image-a lamb badge in the nft style. The whole lamb should be displayed in the picture, painted in an original way. The surface of the lamb can be covered with an interesting original ornament. A lamb should be sweet and sincere.',
 			n: 1,  // Количество изображений, которые нужно сгенерировать
 			size: '1024x1024',  // Размер изображения: 256x256, 512x512, 1024x1024
 		}
@@ -114,7 +112,7 @@ const Main = () => {
 							</Label>
 							<Input
 								className={'col-span-3'}
-								defaultValue={'Кама'}
+								defaultValue={'Тимур Айгумов'}
 								id={'name'}
 							/>
 						</div>
@@ -151,7 +149,10 @@ const Main = () => {
 	)
 }
 const Banner = () => {
-	return <div className={'bg-[#453254] text-white  rounded row-2 justify-between items-center px-1'}>
+	const nav = useNavigate()
+	return <div className={'bg-[#453254] text-white  rounded row-2 justify-between items-center px-1'} onClick={() => {
+		nav('/help')
+	}}>
 		<div className={'col p-4'}>
 			<div className={'text-2xl'}>
 				Пожертвование
@@ -170,11 +171,15 @@ interface IPlace {
 	description: string
 	image?: string
 	money?: number | string
-	need?: number
+	need?: number | string
 	isDone?: boolean
 }
 
 interface ICard extends IPlace {
+}
+
+const randomColors = () => {
+	return `#${Math.floor(Math.random() * 16777215).toString(16)}`
 }
 
 export const Card = ({description, image, money, need, isDone, title}: ICard) => {
@@ -184,8 +189,11 @@ export const Card = ({description, image, money, need, isDone, title}: ICard) =>
 					 src={image}/>
 			<div className={'teni absolute left-0 top-0 w-full h-full '}></div>
 			<div className={'absolute left-0 top-0 flex justify-between text-white w-full p-2 items-center'}>
-				<div className={'text-white text-xl '}>
-					{title}
+				<div className={'row-2 items-center'}>
+					<div className={' w-10 h-10 rounded-full'} style={{background: randomColors()}}></div>
+					<div className={'text-white text-xl '}>
+						{title}
+					</div>
 				</div>
 				<CiStar className={'w-8 h-8'}/>
 			</div>
@@ -211,12 +219,25 @@ export const Card = ({description, image, money, need, isDone, title}: ICard) =>
 				}
 
 			</div>
-			<div>
-				<div className={'text-muted-foreground'}>
-					собрали
-				</div>
-				<div className={'text-2xl font-bold text-accent'}>
-					{money} ₽
+			<div className={'row justify-between'}>
+				{need
+					&&
+					<div className={'col'}>
+						<div className={'text-muted-foreground'}>
+							нужно
+						</div>
+						<div className={'text-2xl font-bold text-accent'}>
+							{need} ₽
+						</div>
+					</div>
+				}
+				<div className={'col'}>
+					<div className={'text-muted-foreground'}>
+						собрали
+					</div>
+					<div className={'text-2xl font-bold text-accent'}>
+						{money} ₽
+					</div>
 				</div>
 			</div>
 			<div className={'text-xl font-bold '}>
@@ -239,9 +260,12 @@ export const Card = ({description, image, money, need, isDone, title}: ICard) =>
 						</div>
 						<MdArrowForwardIos/>
 						<div className={'relative w-20'}>
-							<div className={'absolute left-0 top-[-20px] bg-amber-600 w-10 h-10 rounded-full border-4 border-white'}></div>
-							<div className={'absolute left-6 top-[-20px] bg-blue-600 w-10 h-10 rounded-full border-4 border-white'}></div>
-							<div className={'absolute left-12 top-[-20px] bg-red-500 w-10 h-10 rounded-full border-4 border-white'}></div>
+							<div className={'absolute left-0 top-[-20px] bg-amber-600 w-10 h-10 rounded-full border-4 border-white'}
+									 style={{background: randomColors()}}></div>
+							<div className={'absolute left-6 top-[-20px] bg-blue-600 w-10 h-10 rounded-full border-4 border-white'}
+									 style={{background: randomColors()}}></div>
+							<div className={'absolute left-12 top-[-20px] bg-red-500 w-10 h-10 rounded-full border-4 border-white'}
+									 style={{background: randomColors()}}></div>
 						</div>
 					</div>
 				</div>

@@ -7,6 +7,7 @@ import { Completed } from 'pages/completed'
 import { Profile } from 'pages/profile'
 import Settings from 'pages/settings'
 import Preview from 'pages/preview'
+import { Help } from 'pages/help'
 import Auth from 'pages/auth'
 import Main from 'pages/main'
 
@@ -34,6 +35,9 @@ export const router = createBrowserRouter([
 			{
 				element: <Profile/>,
 				path: 'profile',
+			}, {
+				element: <Help/>,
+				path: 'help',
 			},
 			//
 			{

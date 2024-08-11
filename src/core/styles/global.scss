@@ -118,16 +118,21 @@ a {
 	height: 500px;
 	object-fit: contain;
 	animation: forwards mon 8s;
+
+	transform-style: preserve-3d;
 }
 
 @keyframes mon {
 	0% {
 		opacity: 0;
+		transform: rotateY(0deg);
 	}
 	50% {
 		opacity: 1;
 	}
 	100% {
 		opacity: 0;
+		transform: rotateY(360deg);
+
 	}
 }

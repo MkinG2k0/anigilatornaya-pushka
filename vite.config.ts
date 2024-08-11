@@ -9,6 +9,7 @@ export default defineConfig({
 	build: {
 		outDir: './web',
 	},
+	publicDir: 'resources',
 	plugins: [react(), tsconfigPaths(),
 // reactInspector(),
 		svgr({svgrOptions: {exportType: 'default'}, include: '**/*.svg'}),

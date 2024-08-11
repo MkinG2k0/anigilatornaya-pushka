@@ -58,11 +58,17 @@ const dataImage = [
 	'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/fbf9be2c-b783-4cfa-b49a-2be3016f8c0e/Default_Create_an_original_image_of_a_mosque_icon_in_a_network_3.jpg',
 ]
 
+const dataBee = [
+	'/money/1.jpg',
+	'/money/2.jpg',
+]
+
 export const Help = () => {
 	const {width, height} = useWindowSize()
 	const [onHelp, setOnHelp] = useState(false)
 	const [numberPeace, setNumberPeace] = useState(0)
 	const [image, setImage] = useState('')
+	const [type, setType] = useState('')
 
 	const client = new OpenAI({
 		apiKey: import.meta.env.VITE_OPENAI, // This is the default and can be omitted
@@ -80,8 +86,14 @@ export const Help = () => {
 	}
 
 	const genImage = () => {
-		setImage(dataImage[generateNumber(0, dataImage.length - 1)])
+		console.log(type)
+		if (type === 'Барашка') {
+			setImage(dataBee[generateNumber(0, dataBee.length - 1)])
+		} else {
+			setImage(dataImage[generateNumber(0, dataImage.length - 1)])
+		}
 	}
+
 	useEffect(() => {
 		// main()
 	}, [])
@@ -110,7 +122,9 @@ export const Help = () => {
 		<Dialog>
 			<div className={'row-2 flex-wrap overflow-y-auto'}>
 				{
-					data.map((value) => <Card {...value} key={value.title}/>)
+					data.map((value) => <Card {...value} key={value.title} set={(value) => {
+						setType(value)
+					}}/>)
 				}
 			</div>
 			<DialogContent className={'sm:max-w-[425px]'}>

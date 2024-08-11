@@ -104,13 +104,13 @@ const Main = () => {
 	}
 
 	useEffect(() => {
-		giga()
+		// giga()
 	}, [])
 
 	useEffect(() => {
 		let timer
 		if (numberPeace > 0) {
-			giga()
+			// giga()
 			timer = setTimeout(() => {
 				setNumberPeace(0)
 				setOnHelp(false)
@@ -212,13 +212,14 @@ interface IPlace {
 }
 
 interface ICard extends IPlace {
+	set?(value: string): void
 }
 
 const randomColors = () => {
 	return `#${Math.floor(Math.random() * 16777215).toString(16)}`
 }
 
-export const Card = ({description, image, money, need, isDone, title}: ICard) => {
+export const Card = ({description, image, money, need, isDone, title, set}: ICard) => {
 	return <div className={'bg-white rounded overflow-hidden flex-auto w-[clamp(400px,40%,500px)]'}>
 		<div className={'w-full h-18 relative'}>
 			<img alt={''} className={'h-[220px] w-full object-cover '}
@@ -248,7 +249,7 @@ export const Card = ({description, image, money, need, isDone, title}: ICard) =>
 							<div className={'px-3 flex-auto text-center'}>Сбор</div>
 							<Button className={'flex-auto'}>Отчет</Button>
 						</div> :
-						<DialogTrigger asChild>
+						<DialogTrigger asChild onClick={() => set?.(title)}>
 							<Button className={'flex-auto text-lg font-bold'}>Помочь</Button>
 						</DialogTrigger>
 

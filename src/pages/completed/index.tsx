@@ -5,10 +5,10 @@ import { Dialog } from 'shared/ui/dialog'
 const data: any[] = [
 	{
 		title: 'Помощь малоимущим',
-		description: '',
+		description: 'Помощь малоимущим',
 		image: 'https://cdn.leonardo.ai/users/7eed60b5-bb28-4022-9a1e-739aa1ca9674/generations/9e4eb798-d371-4cdf-b4a6-7a5c6e74fe3c/Default_A_diverse_group_of_cartoon_characters_banding_together_1.jpg?w=512',
 		isDone: true,
-		money: '452 000',
+		money: '226 000',
 	}, {
 		title: 'Помощь в рамадан',
 		description: 'Помощь проведения рамадана в бедных странах',
@@ -24,14 +24,13 @@ export const Completed = () => {
 			<div className={'text-xl'}>
 				Завершенные
 			</div>
-			<div className={'text-gray-500'}>
-				Всего: 3
-			</div>
 		</div>
 		<Dialog>
-			{
-				data.map((value) => <Card {...value} key={value.title}/>)
-			}
+			<div className={'row-2 flex-wrap overflow-y-auto'}>
+				{
+					data.map((value) => <Card {...value} key={value.title}/>)
+				}
+			</div>
 		</Dialog>
 	</div>
 }

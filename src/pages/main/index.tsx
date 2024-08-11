@@ -24,6 +24,7 @@ import { HiOutlineUsers } from 'react-icons/hi2'
 import { PiShareFat } from 'react-icons/pi'
 import { CiStar } from 'react-icons/ci'
 import OpenAI from 'openai'
+import axios from 'axios'
 
 const data: IPlace[] = [
 	{
@@ -70,14 +71,47 @@ const Main = () => {
 		setImage(chatCompletion.data[0].url!)
 	}
 
+	async function giga() {
+		const data = await fetch('https://gigachat.devices.sberbank.ru/api/v1/chat/completions', {
+			// withCredentials: true,
+			body: JSON.stringify({
+				'model': 'GigaChat',
+				'messages': [
+					{
+						'role': 'system',
+						'content': 'Ты — Василий Кандинский',
+					},
+					{
+						'role': 'user',
+						'content': 'Нарисуй розового кота',
+					},
+				],
+				'function_call': 'auto',
+			}),
+			method: 'POST',
+
+			headers: {
+				// 'Content-Type': 'application/json',
+				// 'Accept': 'application/json',
+				// Authorization: `Bearer ${import.meta.env.VITE_GIGA_AUTH}`,
+				aaaaaaaaa: 'asdas',
+			},
+
+			mode: 'no-cors',
+		})
+		const daaa = await data.json()
+		console.log(daaa)
+		setImage('')
+	}
+
 	useEffect(() => {
-		main()
+		giga()
 	}, [])
 
 	useEffect(() => {
 		let timer
 		if (numberPeace > 0) {
-			main()
+			giga()
 			timer = setTimeout(() => {
 				setNumberPeace(0)
 				setOnHelp(false)
@@ -90,7 +124,8 @@ const Main = () => {
 	}, [numberPeace])
 
 	return (
-		<div className={'col-2 p-2 overflow-auto'}>
+		<div className={'col-2 p-2  overflow-y-auto '}>
+			<img src={image}/>
 			<Banner/>
 			{
 				onHelp && <img className={'money'} src={image}/>
@@ -98,9 +133,11 @@ const Main = () => {
 
 
 			<Dialog>
-				{
-					data.map((value) => <Card {...value} key={value.title}/>)
-				}
+				<div className={'row-2 flex-wrap overflow-y-auto'}>
+					{
+						data.map((value) => <Card {...value} key={value.title}/>)
+					}
+				</div>
 				<DialogContent className={'sm:max-w-[425px]'}>
 					<DialogHeader>
 						<DialogTitle>Помочь</DialogTitle>
@@ -183,7 +220,7 @@ const randomColors = () => {
 }
 
 export const Card = ({description, image, money, need, isDone, title}: ICard) => {
-	return <div className={'bg-white rounded overflow-hidden'}>
+	return <div className={'bg-white rounded overflow-hidden flex-auto w-[clamp(400px,40%,500px)]'}>
 		<div className={'w-full h-18 relative'}>
 			<img alt={''} className={'h-[220px] w-full object-cover '}
 					 src={image}/>
@@ -244,10 +281,10 @@ export const Card = ({description, image, money, need, isDone, title}: ICard) =>
 				{description}
 			</div>
 			<div className={'w-full bg-gray-800 h-[1px]'}></div>
-			<div className={'row-4 text-2xl justify-between h-10 items-center'}>
+			<div className={'row-2 text-2xl justify-between h-10 items-center'}>
 				<div className={'row-2'}>
 					<HiOutlineUsers/>
-					<div className={'text-xl'}>{generateNumber(10, 700)}</div>
+					<div className={'text-xl'}>{generateNumber(10, 99)}</div>
 					<div className={'h-6 w-[1px] bg-gray-800'}></div>
 					<AiOutlineMessage/>
 					<div className={'text-xl'}>{generateNumber(10, 99)}</div>

@@ -1,21 +1,3 @@
-# Template
-
-- to build for a mobile platform, you need to run the script gen:add-android or gen:add-ios
-
-* TS
-* React
-* React-Router-Dom
-* Redux-Toolkit
-* SCSS
-* Vite
-* Generate Scripts
-* Eslint
-* Prettier
-* Axios
-* Ionic
-* Capacitor
-
-dev server    
-add in capacitor config
-"url": "http://192.168.31.245:5173/"
-
+Представьте мир, где каждый акт доброты становится уникальным и ценным. Мы разрабатываем платформу, которая
+визуализирует благотворительный акт, используя искусственный интеллект для создания персонализированных цифровых
+артефактов (NFT-бейджи).

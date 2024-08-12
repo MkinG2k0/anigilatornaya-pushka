@@ -59,6 +59,14 @@ const data: IPlace[] = [
 		need: '273 523',
 		type: 'child',
 	},
+	{
+		title: 'Преданное сердце',
+		description: 'Поможем приюту для бездомных животных',
+		image: '6.jpg',
+		money: '44 879',
+		need: '37 390',
+		type: 'cats',
+	},
 ]
 
 const Main = () => {

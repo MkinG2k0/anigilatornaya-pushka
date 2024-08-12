@@ -33,6 +33,7 @@ const data: IPlace[] = [
 		image: 'photo_2024-08-11_22-45-03.jpg',
 		need: '61 812',
 		money: '2 898',
+		type: 'dogs',
 	},
 	{
 		title: 'Спина бифида',
@@ -40,6 +41,7 @@ const data: IPlace[] = [
 		image: 'photo_2024-08-11_22-45-00.jpg',
 		money: '131 799',
 		need: '335 539',
+		type: 'child',
 	},
 	{
 		title: 'Желтый аист',
@@ -47,6 +49,7 @@ const data: IPlace[] = [
 		image: 'photo_2024-08-11_22-44-53.jpg',
 		money: '4 098',
 		need: '92 927',
+		type: 'child',
 	},
 ]
 
@@ -55,57 +58,12 @@ const Main = () => {
 	const [onHelp, setOnHelp] = useState(false)
 	const [numberPeace, setNumberPeace] = useState(0)
 	const [image, setImage] = useState('')
+	const [type, setType] = useState('')
 
-	const client = new OpenAI({
-		apiKey: import.meta.env.VITE_OPENAI, // This is the default and can be omitted
-		dangerouslyAllowBrowser: true,
-	})
-
-	async function main() {
-		const params: OpenAI.Images.ImageGenerateParams = {
-			prompt: 'Generate an original image-a lamb badge in the nft style. The whole lamb should be displayed in the picture, painted in an original way. The surface of the lamb can be covered with an interesting original ornament. A lamb should be sweet and sincere.',
-			n: 1,  // Количество изображений, которые нужно сгенерировать
-			size: '1024x1024',  // Размер изображения: 256x256, 512x512, 1024x1024
-		}
-		const chatCompletion = await client.images.generate(params)
-		setImage(chatCompletion.data[0].url!)
+	const onGen = () => {
+		const num = generateNumber(0, 7)
+		setImage(`/help/${type}/${num}.jfif`)
 	}
-
-	async function giga() {
-		const data = await fetch('https://gigachat.devices.sberbank.ru/api/v1/chat/completions', {
-			// withCredentials: true,
-			body: JSON.stringify({
-				'model': 'GigaChat',
-				'messages': [
-					{
-						'role': 'system',
-						'content': 'Ты — Василий Кандинский',
-					},
-					{
-						'role': 'user',
-						'content': 'Нарисуй розового кота',
-					},
-				],
-				'function_call': 'auto',
-			}),
-			method: 'POST',
-
-			headers: {
-				// 'Content-Type': 'application/json',
-				// 'Accept': 'application/json',
-				// Authorization: `Bearer ${import.meta.env.VITE_GIGA_AUTH}`,
-			},
-
-			mode: 'no-cors',
-		})
-		const daaa = await data.json()
-		console.log(daaa)
-		setImage('')
-	}
-
-	useEffect(() => {
-		// giga()
-	}, [])
 
 	useEffect(() => {
 		let timer
@@ -124,8 +82,6 @@ const Main = () => {
 
 	return (
 		<div className={'col-2 p-2 '}>
-			<img src={image}/>
-			<Banner/>
 			{
 				onHelp && <img className={'money'} src={image}/>
 			}
@@ -134,7 +90,7 @@ const Main = () => {
 			<Dialog>
 				<div className={'row-2 flex-wrap overflow-y-auto'}>
 					{
-						data.map((value) => <Card {...value} key={value.title}/>)
+						data.map((value) => <Card {...value} key={value.title} set={setType}/>)
 					}
 				</div>
 				<DialogContent className={'sm:max-w-[425px]'}>
@@ -170,6 +126,7 @@ const Main = () => {
 							<Button onClick={() => {
 								setOnHelp(true)
 								setNumberPeace(200)
+								onGen()
 							}}>Отправить</Button>
 						</DialogClose>
 					</DialogFooter>
@@ -209,6 +166,7 @@ interface IPlace {
 	money?: number | string
 	need?: number | string
 	isDone?: boolean
+	type: string
 }
 
 interface ICard extends IPlace {
@@ -219,7 +177,7 @@ const randomColors = () => {
 	return `#${Math.floor(Math.random() * 16777215).toString(16)}`
 }
 
-export const Card = ({description, image, money, need, isDone, title, set}: ICard) => {
+export const Card = ({description, image, money, need, isDone, title, type, set}: ICard) => {
 	return <div className={'bg-white rounded overflow-hidden flex-auto w-[clamp(400px,40%,500px)]'}>
 		<div className={'w-full h-18 relative'}>
 			<img alt={''} className={'h-[220px] w-full object-cover '}
@@ -249,7 +207,7 @@ export const Card = ({description, image, money, need, isDone, title, set}: ICar
 							<div className={'px-3 flex-auto text-center'}>Сбор</div>
 							<Button className={'flex-auto'}>Отчет</Button>
 						</div> :
-						<DialogTrigger asChild onClick={() => set?.(title)}>
+						<DialogTrigger asChild onClick={() => set?.(type)}>
 							<Button className={'flex-auto text-lg font-bold'}>Помочь</Button>
 						</DialogTrigger>
 

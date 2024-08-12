@@ -186,7 +186,7 @@ const randomColors = () => {
 }
 
 export const Card = ({description, image, money, need, isDone, title, type, set}: ICard) => {
-	return <div className={'bg-white rounded overflow-hidden flex-auto w-[clamp(400px,40%,500px)]'}>
+	return <div className={'bg-white rounded overflow-hidden flex-auto w-[clamp(400px,40%,500px)] col'}>
 		<div className={'w-full h-18 relative'}>
 			<img alt={''} className={'h-[220px] w-full object-cover '}
 					 src={image}/>
@@ -201,7 +201,7 @@ export const Card = ({description, image, money, need, isDone, title, type, set}
 				<CiStar className={'w-8 h-8'}/>
 			</div>
 		</div>
-		<div className={'col-2 p-3'}>
+		<div className={'col-2 p-3 flex-auto'}>
 			<div className={'row-2 '}>
 				<Button className={'row-2 text-md'} variant={'secondary'}>
 					<PiShareFat/>
@@ -243,7 +243,7 @@ export const Card = ({description, image, money, need, isDone, title, type, set}
 					</div>
 				</div>
 			</div>
-			<div className={'text-xl font-bold '}>
+			<div className={'text-xl font-bold flex-auto'}>
 				{description}
 			</div>
 			<div className={'w-full bg-gray-800 h-[1px]'}></div>

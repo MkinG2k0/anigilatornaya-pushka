@@ -51,6 +51,14 @@ const data: IPlace[] = [
 		need: '92 927',
 		type: 'child',
 	},
+	{
+		title: 'Провидение',
+		description: 'У Аноры ретинопатия. Ей нужна операция, чтобы не потерять зрение',
+		image: '5.jpg',
+		money: '199 369',
+		need: '273 523',
+		type: 'child',
+	},
 ]
 
 const Main = () => {
